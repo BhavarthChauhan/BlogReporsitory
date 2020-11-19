@@ -37,8 +37,6 @@ public class CommentController {
     @PostMapping("addComment")
     public List<Comment> addCommentToPost(@RequestBody PostedComment postedComment) {
 
-        System.out.println("asd");
-
         Post post = this.postRepository.getPostById(postedComment.getPostId()).get(0);
         User user = this.userRepository.getUserByUserName(postedComment.getUserName()).get(0);
 

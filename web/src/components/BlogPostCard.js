@@ -20,7 +20,7 @@ class BlogPostCard extends React.Component {
     render() {
         return (
             <div>
-                <Card style={{ width: '18rem' }}>
+                <Card style={{ width: '18rem',height:'10rem'  }}>
                     <Card.Body>
                         <Card.Title>{this.props.cardTitle}</Card.Title>
                         <Card.Text>

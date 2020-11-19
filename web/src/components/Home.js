@@ -43,6 +43,7 @@ class Home extends React.Component{
     }
 
    logOutUser(){
+        console.log('ad')
         this.setState({
             userLoggedIn:false,
             userName:undefined
@@ -81,7 +82,8 @@ class Home extends React.Component{
 
                 <BlogPostsGrid
                     showBlogPost={this.showBlogPost}
-
+                    isUserLoggedIn={this.state.userLoggedIn}
+                    userNameLoggedIn={this.state.userName}
                 />
                 {this.state.blogPostVisible ? <BlogPost
                             closeBlogPost={this.closeBlogPost}

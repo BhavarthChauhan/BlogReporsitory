@@ -27,6 +27,17 @@ class BlogService {
         return axios.post(this.baseUrl+'/addComment', data);
 
     }
+
+    addNewPost(title, description, content, userName){
+        let data={
+            'title':title,
+            'description':description,
+            'content':content,
+            'userName':userName
+        };
+
+        return axios.post(this.baseUrl+'/addPost', data);
+    }
 }
 
 export default new BlogService();

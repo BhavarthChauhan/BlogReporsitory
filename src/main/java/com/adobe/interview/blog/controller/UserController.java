@@ -35,8 +35,6 @@ public class UserController {
 
     @PostMapping(value="/signUp"  ,headers="Accept=application/json")
     public ResponseEntity<LoginResponse> signUpUser(@RequestBody User user){
-        System.out.println("asd");
-
         return new ResponseEntity<LoginResponse>(login.signUpUser(user, userRepository), HttpStatus.OK);
 
     }
