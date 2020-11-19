@@ -1,9 +1,11 @@
 package com.adobe.interview.blog.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "User")
 public class User {
 
     @Id
@@ -11,12 +13,15 @@ public class User {
     private long id;
 
     @Column(name = "name")
-    private String firstName;
+    @JsonProperty(value = "name")
+    private String name;
 
-    @Column(name ="username")
+    @Column(name ="userName")
+    @JsonProperty(value="userName")
     private String userName;
 
      @Column(name="password")
+     @JsonProperty(value="password")
     private String password;
 
     public User(){
@@ -24,7 +29,14 @@ public class User {
     }
 
     public User( String firstName, String userName, String password) {
-        this.firstName = firstName;
+        this.name = firstName;
+        this.userName = userName;
+        this.password = password;
+    }
+
+    public User( long id, String firstName, String userName, String password) {
+        this.id = id;
+        this.name = firstName;
         this.userName = userName;
         this.password = password;
     }
@@ -37,12 +49,12 @@ public class User {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String firstName) {
+        this.name = firstName;
     }
 
     public String getUserName() {

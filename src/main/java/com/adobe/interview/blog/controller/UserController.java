@@ -1,13 +1,16 @@
 package com.adobe.interview.blog.controller;
 
+import com.adobe.interview.blog.components.Login.Login;
+import com.adobe.interview.blog.components.Login.LoginResponse;
 import com.adobe.interview.blog.model.User;
 import com.adobe.interview.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -15,6 +18,7 @@ import java.util.List;
 @RequestMapping("api/")
 public class UserController {
 
+    Login login = new Login();
 
     @Autowired
     private UserRepository userRepository;
@@ -24,4 +28,18 @@ public class UserController {
             return this.userRepository.findAll();
     }
 
+
+    @GetMapping(value = "signIn/{userName}/{password}")
+    public ResponseEntity<LoginResponse> signInUser(@PathVariable("userName") String userName, @PathVariable("password")String password ){
+
+        return new ResponseEntity<LoginResponse>(login.signUserIn(userName, password, userRepository), HttpStatus.OK);
+    }
+
+    @PostMapping(value="/signUp"  ,headers="Accept=application/json")
+    public ResponseEntity<LoginResponse> signUpUser(@RequestBody User user){
+        System.out.println("asd");
+
+        return new ResponseEntity<LoginResponse>(login.signUpUser(user, userRepository), HttpStatus.OK);
+
+    }
 }
