@@ -1,6 +1,7 @@
 import './App.css';
 import Home from "../src/components/Home"
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'rodal/lib/rodal.css';
 function App() {
 
   return (

@@ -1,4 +1,4 @@
-package com.adobe.interview.blog.components.Login;
+package com.adobe.interview.blog.components.login;
 
 public class LoginResponse {
 

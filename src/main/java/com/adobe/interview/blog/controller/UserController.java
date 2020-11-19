@@ -1,16 +1,14 @@
 package com.adobe.interview.blog.controller;
 
-import com.adobe.interview.blog.components.Login.Login;
-import com.adobe.interview.blog.components.Login.LoginResponse;
+import com.adobe.interview.blog.components.login.Login;
+import com.adobe.interview.blog.components.login.LoginResponse;
 import com.adobe.interview.blog.model.User;
 import com.adobe.interview.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")

@@ -1,4 +1,4 @@
-package com.adobe.interview.blog.components.Login;
+package com.adobe.interview.blog.components.login;
 
 import com.adobe.interview.blog.model.User;
 import com.adobe.interview.blog.repository.UserRepository;
