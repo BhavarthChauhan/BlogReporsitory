@@ -14,4 +14,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Query(value="Select p FROM Post p where p.id = :id")
     public List<Post> getPostById(@Param("id") long id);
+
+    @Query(value = "Select p FROM Post p where p.blogSpace.id = :id")
+    public List<Post> getPostByBlogSpace(@Param("id") long id);
+
 }

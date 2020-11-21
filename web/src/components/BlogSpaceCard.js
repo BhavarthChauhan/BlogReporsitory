@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 import Card from 'react-bootstrap/Card'
 import Button from "react-bootstrap/Button";
-class BlogPostCard extends React.Component {
 
+class BlogSpaceCard extends React.Component{
     constructor(props) {
         super(props);
         this.state={
@@ -13,21 +13,20 @@ class BlogPostCard extends React.Component {
     }
 
     showBlogPost() {
-       this.props.showBlogPost(this.props.postId)
+        this.props.showPosts(this.props.blogSapceId)
     }
 
 
     render() {
-        let theme = this.props.cardTheme ==='Dark'?'secondary':'light';
         return (
             <div>
-                <Card style={{ width: '18rem',height:'10rem'  }} bg={theme}>
+                <Card style={{ width: '18rem',height:'10rem'  }}>
                     <Card.Body>
                         <Card.Title>{this.props.cardTitle}</Card.Title>
                         <Card.Text>
                             {this.props.cardDescription}
                         </Card.Text>
-                        <Button variant="primary" onClick={this.showBlogPost}>Read More</Button>
+                        <Button variant="primary" onClick={this.showBlogPost}>View posts in this space</Button>
                     </Card.Body>
                 </Card>
 
@@ -36,4 +35,4 @@ class BlogPostCard extends React.Component {
     }
 }
 
-export default BlogPostCard
+export default BlogSpaceCard

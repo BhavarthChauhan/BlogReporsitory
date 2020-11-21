@@ -4,8 +4,8 @@ class BlogService {
 
     baseUrl='http://localhost:8081/api';
 
-    getPosts(){
-        return axios.get(this.baseUrl+'/allPosts');
+    getPostsForBlogSpace(blogSpaceId){
+        return axios.get(this.baseUrl+'/allPostsByBlogSpace/'+blogSpaceId);
     }
 
     getPostDetails(postId){
@@ -28,15 +28,32 @@ class BlogService {
 
     }
 
-    addNewPost(title, description, content, userName){
+    addNewPost(title, description, content, userName,blogSpaceId){
         let data={
             'title':title,
             'description':description,
             'content':content,
-            'userName':userName
+            'userName':userName,
+            'blogSpaceId':blogSpaceId,
+            'id':1234
         };
 
         return axios.post(this.baseUrl+'/addPost', data);
+    }
+
+
+    getAllBlogSpaces(){
+        return axios.get(this.baseUrl+'/allBlogSpaces')
+    }
+
+    addNewSpace(spaceName, description, theme, userName){
+        let data={
+            'spaceName':spaceName,
+            'description':description,
+            'theme':theme,
+            'userName':userName
+        }
+        return axios.post(this.baseUrl+'/addNewBlogSpace',data);
     }
 }
 

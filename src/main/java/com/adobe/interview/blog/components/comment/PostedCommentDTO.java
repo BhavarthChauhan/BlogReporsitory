@@ -2,7 +2,7 @@ package com.adobe.interview.blog.components.comment;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class PostedComment {
+public class PostedCommentDTO {
 
     @JsonProperty("userName")
     private String userName;
@@ -13,7 +13,7 @@ public class PostedComment {
     @JsonProperty("text")
     private String text;
 
-    public PostedComment(String userName, long postId, String text) {
+    public PostedCommentDTO(String userName, long postId, String text) {
         this.userName = userName;
         this.postId = postId;
         this.text = text;

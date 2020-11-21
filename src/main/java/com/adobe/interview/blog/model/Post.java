@@ -10,7 +10,7 @@ import org.springframework.data.annotation.TypeAlias;
 import javax.persistence.*;
 
 @Entity
-@Table(name= "Post")
+@Table(name = "Post")
 public class Post {
 
     @Id
@@ -34,14 +34,21 @@ public class Post {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "blogSpace", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private BlogSpace blogSpace;
+
+
     public Post() {
     }
 
-    public Post(String title, String description, String content, User user) {
+    public Post(String title, String description, String content, User user, BlogSpace blogSpace) {
         this.title = title;
         this.description = description;
         this.content = content;
         this.user = user;
+        this.blogSpace = blogSpace;
     }
 
     public long getId() {
@@ -83,4 +90,13 @@ public class Post {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public BlogSpace getBlogSpace() {
+        return blogSpace;
+    }
+
+    public void setBlogSpace(BlogSpace blogSpace) {
+        this.blogSpace = blogSpace;
+    }
+
 }

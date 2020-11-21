@@ -2,7 +2,10 @@ package com.adobe.interview.blog.components.post;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class NewPost {
+public class NewPostDTO {
+
+    @JsonProperty(value = "id")
+    private long id;
 
     @JsonProperty("title")
     private String title;
@@ -16,12 +19,16 @@ public class NewPost {
     @JsonProperty("userName")
     private String userName;
 
+    @JsonProperty("blogSpaceId")
+    private long blogSpaceId;
 
-    public NewPost(String title, String description, String content, String userName) {
+    public NewPostDTO( long id, String title, String description, String content, String userName, long blogSpaceId) {
         this.title = title;
         this.description = description;
         this.content = content;
         this.userName = userName;
+        this.blogSpaceId = blogSpaceId;
+        this.id=id;
     }
 
     public String getTitle() {
@@ -54,5 +61,13 @@ public class NewPost {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public long getBlogSpaceId() {
+        return blogSpaceId;
+    }
+
+    public void setBlogSpaceId(long blogSpaceId) {
+        this.blogSpaceId = blogSpaceId;
     }
 }

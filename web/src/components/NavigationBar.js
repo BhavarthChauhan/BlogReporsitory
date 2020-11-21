@@ -19,6 +19,15 @@ class NavigationBar extends React.Component{
                       {
                           this.props.userLoggedIn ?
                               <Navbar.Text>
+                                  {
+                                      this.props.pageTypeVisible ==='blogPosts'?
+                                          <Button variant="outline-light"
+                                                  onClick={this.props.onViewBlogSpacesClick}
+                                          >View Blog Spaces</Button>
+                                          :
+                                          undefined
+                                  }
+                                  &nbsp;&nbsp;&nbsp;
                                   Signed in as: {this.props.userName + '      '}
                                   <Button variant="outline-light"
                                   onClick={this.props.logOutUser}>
@@ -27,7 +36,15 @@ class NavigationBar extends React.Component{
                               </Navbar.Text>
                               :
                               <Form inline>
-
+                                  {
+                                      this.props.pageTypeVisible ==='blogPosts'?
+                                          <Button variant="outline-light"
+                                                  onClick={this.props.onViewBlogSpacesClick}
+                                          >View Blog Spaces</Button>
+                                          :
+                                          undefined
+                                  }
+                                  &nbsp;&nbsp;&nbsp;
                                   <Button variant="outline-light"
                                             onClick={this.props.onSignInButtonClick}
                                   >Sign in / Create Account</Button>

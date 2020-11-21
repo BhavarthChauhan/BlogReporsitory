@@ -3,63 +3,92 @@ import NavigationBar from "./NavigationBar";
 import SignInModal from "./SignInModal";
 import BlogPostsGrid from "./BlogPostsGrid";
 import BlogPost from "./BlogPost";
+import BlogSpacesGrid from "./BlogSpacesGrid";
 
-class Home extends React.Component{
+class Home extends React.Component {
     constructor() {
         super();
         this.state= {
             userLoggedIn:false,
             userName:undefined,
             showSignInModal:false,
-            blogPostVisible:false,
-            postId:undefined
+            pageTypeVisible:'blogSpaces',
+            blogSpaceId:undefined
         };
         this.signInButtonClicked = this.signInButtonClicked.bind(this);
         this.toggleSignInModal = this.toggleSignInModal.bind(this);
         this.signInUser = this.signInUser.bind(this);
         this.logOutUser = this.logOutUser.bind(this);
-        this.showBlogPost = this.showBlogPost.bind(this);
-        this.closeBlogPost = this.closeBlogPost.bind(this);
+
+        this.renderBlogSpaces = this.renderBlogSpaces.bind(this);
+        this.renderPosts = this.renderPosts.bind(this);
+
+        this.showPostsForBlogSpace = this.showPostsForBlogSpace.bind(this);
+        this.onViewBlogSpacesClicked = this.onViewBlogSpacesClicked.bind(this);
     }
 
-    signInButtonClicked(){
+    signInButtonClicked() {
         this.setState({
-            showSignInModal:true
+            showSignInModal: true
         });
     }
 
-    toggleSignInModal(){
+    toggleSignInModal() {
         this.setState({
-            showSignInModal:!this.state.showSignInModal
+            showSignInModal: !this.state.showSignInModal
         });
     }
 
-    signInUser(userName){
+    signInUser(userName) {
         this.setState({
-            userName:userName,
-            userLoggedIn:true,
-            showSignInModal:false
+            userName: userName,
+            userLoggedIn: true,
+            showSignInModal: false
         })
     }
 
-   logOutUser(){
-        console.log('ad')
+    logOutUser() {
         this.setState({
-            userLoggedIn:false,
-            userName:undefined
+            userLoggedIn: false,
+            userName: undefined
         });
-   }
+    }
 
-    showBlogPost(postId) {
+    showPostsForBlogSpace(blogSpaceId){
         this.setState({
-            blogPostVisible:true,
-            postId:postId
+            blogSpaceId:blogSpaceId,
+            pageTypeVisible:'blogPosts'
         })
     }
 
-    closeBlogPost(){
+    renderBlogSpaces(){
+        return (
+            <div>
+                <BlogSpacesGrid
+                    isUserLoggedIn={this.state.userLoggedIn}
+                    userNameLoggedIn={this.state.userName}
+                    showPostsForBlogSpace={this.showPostsForBlogSpace}
+                />
+            </div>
+        )
+    }
+
+    renderPosts(){
+        return (
+            <div>
+                <BlogPostsGrid
+                    showBlogPost={this.showBlogPost}
+                    isUserLoggedIn={this.state.userLoggedIn}
+                    userNameLoggedIn={this.state.userName}
+                    blogSpaceId={this.state.blogSpaceId}
+                />
+            </div>
+        )
+    }
+
+    onViewBlogSpacesClicked(){
         this.setState({
-            blogPostVisible:false
+            pageTypeVisible:'blogSpaces'
         })
     }
 
@@ -71,6 +100,8 @@ class Home extends React.Component{
                     userName={this.state.userName}
                     onSignInButtonClick={this.signInButtonClicked}
                     logOutUser={this.logOutUser}
+                    pageTypeVisible={this.state.pageTypeVisible}
+                    onViewBlogSpacesClick={this.onViewBlogSpacesClicked}
                 />
 
                 <SignInModal
@@ -80,17 +111,12 @@ class Home extends React.Component{
                     signUpUser={this.signUpUser}
                 />
 
-                <BlogPostsGrid
-                    showBlogPost={this.showBlogPost}
-                    isUserLoggedIn={this.state.userLoggedIn}
-                    userNameLoggedIn={this.state.userName}
-                />
-                {this.state.blogPostVisible ? <BlogPost
-                            closeBlogPost={this.closeBlogPost}
-                            postId={this.state.postId}
-                            userLoggedIn={this.state.userLoggedIn}
-                            userName={this.state.userName}
-                /> : undefined}
+                {
+                    this.state.pageTypeVisible==='blogSpaces'?
+                        this.renderBlogSpaces(): this.renderPosts()
+                }
+
+
             </div>
         )
     }

@@ -1,7 +1,7 @@
 package com.adobe.interview.blog.controller;
 
 
-import com.adobe.interview.blog.components.comment.PostedComment;
+import com.adobe.interview.blog.components.comment.PostedCommentDTO;
 import com.adobe.interview.blog.model.Comment;
 import com.adobe.interview.blog.model.Post;
 import com.adobe.interview.blog.model.User;
@@ -11,9 +11,7 @@ import com.adobe.interview.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -35,7 +33,7 @@ public class CommentController {
     }
 
     @PostMapping("addComment")
-    public List<Comment> addCommentToPost(@RequestBody PostedComment postedComment) {
+    public List<Comment> addCommentToPost(@RequestBody PostedCommentDTO postedComment) {
 
         Post post = this.postRepository.getPostById(postedComment.getPostId()).get(0);
         User user = this.userRepository.getUserByUserName(postedComment.getUserName()).get(0);

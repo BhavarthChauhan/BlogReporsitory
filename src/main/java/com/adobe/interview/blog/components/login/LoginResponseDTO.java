@@ -1,11 +1,11 @@
 package com.adobe.interview.blog.components.login;
 
-public class LoginResponse {
+public class LoginResponseDTO {
 
     private boolean statusOk;
     private String errorMessage;
 
-    public LoginResponse(boolean statusOk, String errorMessage) {
+    public LoginResponseDTO(boolean statusOk, String errorMessage) {
         this.statusOk = statusOk;
         this.errorMessage = errorMessage;
     }
