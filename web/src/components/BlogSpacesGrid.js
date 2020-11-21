@@ -5,7 +5,9 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import BlogSpaceCard from "./BlogSpaceCard";
 import AddNewBlogSpace from "./AddNewBlogSpace";
+import {Responsive , WidthProvider} from 'react-grid-layout';
 
+const ResponsiveGridLayout = WidthProvider(Responsive);
 class BlogSpacesGrid extends React.Component {
 
     constructor(props) {
@@ -38,7 +40,7 @@ class BlogSpacesGrid extends React.Component {
             })
     }
 
-    generateLayout() {
+    generateLayout(maxCols) {
         let layouts = [];
 
         var row = 0;
@@ -46,17 +48,17 @@ class BlogSpacesGrid extends React.Component {
         for (var blogSpace in this.state.blogSpaces) {
 
             let layout = {
-                'i': this.state.blogSpaces[blogSpace].id.toString(),
+                'i': this.state.blogSpaces[blogSpace].idString,
                 'x': col,
                 'y': row,
                 'h': 1,
                 'w': 1,
                 'static': true
             };
-            layouts.push(layout)
+            layouts.push(layout);
             col++;
-            if (col > 3) {
-                row = row + 4;
+            if (col >= maxCols) {
+                row++;
                 col = 0;
             }
 
@@ -92,7 +94,7 @@ class BlogSpacesGrid extends React.Component {
             .then((response) => {
                 this.setState({
                     blogSpaces: response.data,
-                    addNewBlogSpaceVisible:false
+                    addNewBlogSpaceVisible: false
                 })
             })
     }
@@ -101,7 +103,7 @@ class BlogSpacesGrid extends React.Component {
         if (this.props.isUserLoggedIn) {
             return (
                 <div>
-                    <Card style={{width: '18rem', height: '10rem'}}>
+                    <Card>
                         <Card.Body>
                             <Card.Title>Add new blog space</Card.Title>
                             <Card.Text>
@@ -115,7 +117,7 @@ class BlogSpacesGrid extends React.Component {
         } else {
             return (
                 <div>
-                    <Card style={{width: '18rem', height: '10rem'}}>
+                    <Card>
                         <Card.Body>
                             <Card.Title>Login to add a new blog space</Card.Title>
 
@@ -127,24 +129,37 @@ class BlogSpacesGrid extends React.Component {
     }
 
     render() {
-        let layout = this.generateLayout();
+        let layout = {
+            lg: this.generateLayout(5),
+            md: this.generateLayout(4),
+            sm: this.generateLayout(3),
+            xs: this.generateLayout(2),
+            xxs: this.generateLayout(1)
+        };
+        let addNewCardKey="addNewBlogSpace";
         return (
             <div>
-                <GridLayout className="layout" layout={layout} cols={4} rowHeight={30} width={1200}>
+                <ResponsiveGridLayout className="layout" layouts={layout}
+                                      breakpoints={{lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0}}
+                                      cols={ {lg: 5, md: 4, sm: 3, xs: 2, xxs: 1 }}>
                     {this.state.blogSpaces.map(blogSpace =>
-                        <div key={blogSpace.id.toString()}>
-                            <BlogSpaceCard
-                                cardTitle={blogSpace.spaceName}
-                                cardDescription={blogSpace.description}
-                                blogSapceId={blogSpace.id}
-                                showPosts={this.props.showPostsForBlogSpace}
-                            />
+
+                        <div key={blogSpace.idString}>
+                            <div>
+                                <BlogSpaceCard
+                                    cardTitle={blogSpace.spaceName}
+                                    cardDescription={blogSpace.description}
+                                    blogSapceId={blogSpace.id}
+                                    showPosts={this.props.showPostsForBlogSpace}
+                                    key={blogSpace.id}
+                                />
+                            </div>
                         </div>
                     )}
-                    <div key="addNewBlogSpace">
+                    <div key={addNewCardKey}>
                         {this.renderAddNewCard()}
                     </div>
-                </GridLayout>
+                </ResponsiveGridLayout>
 
                 {this.state.addNewBlogSpaceVisible ?
                     <AddNewBlogSpace
@@ -156,6 +171,7 @@ class BlogSpacesGrid extends React.Component {
                     undefined
                 }
             </div>
+
         )
     }
 

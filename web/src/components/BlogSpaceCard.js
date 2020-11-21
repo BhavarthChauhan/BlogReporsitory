@@ -20,7 +20,7 @@ class BlogSpaceCard extends React.Component{
     render() {
         return (
             <div>
-                <Card style={{ width: '18rem',height:'10rem'  }}>
+                <Card >
                     <Card.Body>
                         <Card.Title>{this.props.cardTitle}</Card.Title>
                         <Card.Text>

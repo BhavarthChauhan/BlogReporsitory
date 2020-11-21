@@ -21,7 +21,7 @@ class BlogPostCard extends React.Component {
         let theme = this.props.cardTheme ==='Dark'?'secondary':'light';
         return (
             <div>
-                <Card style={{ width: '18rem',height:'10rem'  }} bg={theme}>
+                <Card bg={theme}>
                     <Card.Body>
                         <Card.Title>{this.props.cardTitle}</Card.Title>
                         <Card.Text>

@@ -6,7 +6,9 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import AddNewPost from "./AddNewPost";
 import BlogPost from "./BlogPost";
+import {Responsive , WidthProvider} from 'react-grid-layout';
 
+const ResponsiveGridLayout = WidthProvider(Responsive);
 class BlogPostsGrid extends React.Component {
 
     constructor(props) {
@@ -51,7 +53,7 @@ class BlogPostsGrid extends React.Component {
 
     }
 
-    generateLayout() {
+    generateLayout(maxCols) {
         var layouts = [];
         var row = 0;
         var col = 0;
@@ -66,8 +68,8 @@ class BlogPostsGrid extends React.Component {
             };
             layouts.push(layout);
             col++;
-            if (col > 3) {
-                row = row + 4;
+            if (col >=maxCols) {
+                row++;
                 col = 0;
             }
         }
@@ -94,11 +96,11 @@ class BlogPostsGrid extends React.Component {
     }
 
     renderAddNewCard() {
-
+        let theme = this.props.cardTheme ==='Dark'?'secondary':'light';
         if (this.props.isUserLoggedIn && this.loggedInUserCreatedSpace()) {
             return (
                 <div>
-                    <Card style={{width: '18rem', height: '10rem'}}>
+                    <Card bg={theme}>
                         <Card.Body>
                             <Card.Title>Add new post</Card.Title>
                             <Card.Text>
@@ -112,7 +114,7 @@ class BlogPostsGrid extends React.Component {
         } else if (!this.props.isUserLoggedIn) {
             return (
                 <div>
-                    <Card style={{width: '18rem', height: '10rem'}}>
+                    <Card  bg={theme}>
                         <Card.Body>
                             <Card.Title>Login to add a new post if space created by you</Card.Title>
 
@@ -165,11 +167,18 @@ class BlogPostsGrid extends React.Component {
 
     render() {
 
-        let layout = this.generateLayout();
+        let layout = {
+            lg: this.generateLayout(5),
+            md: this.generateLayout(4),
+            sm: this.generateLayout(3),
+            xs: this.generateLayout(2),
+            xxs: this.generateLayout(1)
+        };
         return (
             <div>
-                <GridLayout className="layout" layout={layout} cols={4} rowHeight={30} width={1200}
-                            onLayoutChange={this.onLayoutChange}>
+                <ResponsiveGridLayout className="layout" layouts={layout}
+                            breakpoints={{lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0}}
+                            cols={ {lg: 5, md: 4, sm: 3, xs: 2, xxs: 1 }}>
                     {this.state.posts.map(post =>
                         <div key={post.id.toString()}>
                             <BlogPostCard
@@ -184,7 +193,7 @@ class BlogPostsGrid extends React.Component {
                     <div key="addNewPost">
                         {this.renderAddNewCard()}
                     </div>
-                </GridLayout>
+                </ResponsiveGridLayout>
 
                 {this.state.addNewPostVisible ?
                     <AddNewPost
