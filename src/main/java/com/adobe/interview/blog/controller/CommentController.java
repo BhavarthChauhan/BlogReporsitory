@@ -2,13 +2,14 @@ package com.adobe.interview.blog.controller;
 
 
 import com.adobe.interview.blog.components.comment.PostedCommentDTO;
+import com.adobe.interview.blog.exception.ResourceNotFoundException;
 import com.adobe.interview.blog.model.Comment;
-import com.adobe.interview.blog.model.Post;
-import com.adobe.interview.blog.model.User;
 import com.adobe.interview.blog.repository.CommentRepository;
 import com.adobe.interview.blog.repository.PostRepository;
-import com.adobe.interview.blog.repository.UserRepository;
+import com.adobe.interview.blog.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,28 +19,28 @@ import java.util.List;
 @RequestMapping("api/")
 public class CommentController {
 
+    CommentService commentService = new CommentService();
 
     @Autowired
     CommentRepository commentRepository;
     @Autowired
     PostRepository postRepository;
-    @Autowired
-    UserRepository userRepository;
 
 
     @GetMapping("commentsForPost/{postId}")
-    public List<Comment> getCommentsForPost(@PathVariable("postId") long postId) {
-        return this.commentRepository.getCommentByPostId(postId);
+    public ResponseEntity<List<Comment>> getCommentsForPost(@PathVariable("postId") long postId) {
+        return new ResponseEntity<List<Comment>>(this.commentRepository.getCommentByPostId(postId), HttpStatus.OK);
     }
 
     @PostMapping("addComment")
-    public List<Comment> addCommentToPost(@RequestBody PostedCommentDTO postedComment) {
-
-        Post post = this.postRepository.getPostById(postedComment.getPostId()).get(0);
-        User user = this.userRepository.getUserByUserName(postedComment.getUserName()).get(0);
-
-        Comment comment = new Comment(postedComment.getText(), user, post);
-        this.commentRepository.save(comment);
-        return this.commentRepository.getCommentByPostId(postedComment.getPostId());
+    public ResponseEntity addCommentToPost(@RequestBody PostedCommentDTO postedComment) {
+        try{
+            List<Comment> comments =this.commentService.addCommentToPost(postedComment, postRepository, commentRepository);
+            return new ResponseEntity(comments, HttpStatus.OK);
+        }catch (ResourceNotFoundException e){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
     }
 }

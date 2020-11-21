@@ -49,7 +49,9 @@ class BlogPostsGrid extends React.Component {
                     spaceTheme: response.data.spaceTheme,
                     blogSpaceId: response.data.blogSpaceId
                 })
-            });
+            }).catch((error)=>{
+                this.props.showError(error.response.data);
+        });
 
     }
 
@@ -149,7 +151,9 @@ class BlogPostsGrid extends React.Component {
                     blogSpaceId: response.data.blogSpaceId,
                     addNewPostVisible: false
                 })
-            })
+            }).catch((error)=>{
+                this.props.showError(error.response.data)
+        })
     }
 
     showBlogPost(postId) {
@@ -210,6 +214,7 @@ class BlogPostsGrid extends React.Component {
                         postId={this.state.postId}
                         userLoggedIn={this.props.isUserLoggedIn}
                         userName={this.props.userNameLoggedIn}
+                        showError={this.props.showError}
                     /> : undefined}
             </div>
         );

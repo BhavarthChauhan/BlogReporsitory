@@ -4,16 +4,17 @@ import SignInModal from "./SignInModal";
 import BlogPostsGrid from "./BlogPostsGrid";
 import BlogPost from "./BlogPost";
 import BlogSpacesGrid from "./BlogSpacesGrid";
+import ErrorModal from "./ErrorModal";
 
 class Home extends React.Component {
     constructor() {
         super();
-        this.state= {
-            userLoggedIn:false,
-            userName:undefined,
-            showSignInModal:false,
-            pageTypeVisible:'blogSpaces',
-            blogSpaceId:undefined
+        this.state = {
+            userLoggedIn: false,
+            userName: undefined,
+            showSignInModal: false,
+            pageTypeVisible: 'blogSpaces',
+            blogSpaceId: undefined
         };
         this.signInButtonClicked = this.signInButtonClicked.bind(this);
         this.toggleSignInModal = this.toggleSignInModal.bind(this);
@@ -25,6 +26,9 @@ class Home extends React.Component {
 
         this.showPostsForBlogSpace = this.showPostsForBlogSpace.bind(this);
         this.onViewBlogSpacesClicked = this.onViewBlogSpacesClicked.bind(this);
+
+        this.closeErrorModal = this.closeErrorModal.bind(this);
+        this.openErrorModal = this.openErrorModal.bind(this);
     }
 
     signInButtonClicked() {
@@ -54,26 +58,27 @@ class Home extends React.Component {
         });
     }
 
-    showPostsForBlogSpace(blogSpaceId){
+    showPostsForBlogSpace(blogSpaceId) {
         this.setState({
-            blogSpaceId:blogSpaceId,
-            pageTypeVisible:'blogPosts'
+            blogSpaceId: blogSpaceId,
+            pageTypeVisible: 'blogPosts'
         })
     }
 
-    renderBlogSpaces(){
+    renderBlogSpaces() {
         return (
             <div>
                 <BlogSpacesGrid
                     isUserLoggedIn={this.state.userLoggedIn}
                     userNameLoggedIn={this.state.userName}
                     showPostsForBlogSpace={this.showPostsForBlogSpace}
+                    showError={this.openErrorModal}
                 />
             </div>
         )
     }
 
-    renderPosts(){
+    renderPosts() {
         return (
             <div>
                 <BlogPostsGrid
@@ -81,14 +86,28 @@ class Home extends React.Component {
                     isUserLoggedIn={this.state.userLoggedIn}
                     userNameLoggedIn={this.state.userName}
                     blogSpaceId={this.state.blogSpaceId}
+                    showError={this.openErrorModal}
                 />
             </div>
         )
     }
 
-    onViewBlogSpacesClicked(){
+    onViewBlogSpacesClicked() {
         this.setState({
-            pageTypeVisible:'blogSpaces'
+            pageTypeVisible: 'blogSpaces'
+        })
+    }
+
+    openErrorModal(errorMessage) {
+        this.setState({
+            error: errorMessage,
+            isErrorModalOpen: true
+        })
+    }
+
+    closeErrorModal() {
+        this.setState({
+            isErrorModalOpen: false
         })
     }
 
@@ -109,16 +128,26 @@ class Home extends React.Component {
                     closeSignInModal={this.toggleSignInModal}
                     signInUser={this.signInUser}
                     signUpUser={this.signUpUser}
+                    showError={this.openErrorModal}
                 />
 
                 {
-                    this.state.pageTypeVisible==='blogSpaces'?
-                        this.renderBlogSpaces(): this.renderPosts()
+                    this.state.pageTypeVisible === 'blogSpaces' ?
+                        this.renderBlogSpaces() : this.renderPosts()
                 }
-
+                {
+                    this.state.isErrorModalOpen ?
+                        <ErrorModal
+                            showErrorModal={this.state.isErrorModalOpen}
+                            error={this.state.error}
+                            closeErrorModal={this.closeErrorModal}/>
+                        :
+                        undefined
+                }
 
             </div>
         )
     }
 }
+
 export default Home;

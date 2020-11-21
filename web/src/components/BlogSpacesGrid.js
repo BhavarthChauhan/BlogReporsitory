@@ -37,7 +37,9 @@ class BlogSpacesGrid extends React.Component {
                 this.setState({
                     blogSpaces: response.data
                 })
-            })
+            }).catch((error)=>{
+                this.props.showError(error.response.data);
+})
     }
 
     generateLayout(maxCols) {
@@ -96,6 +98,8 @@ class BlogSpacesGrid extends React.Component {
                     blogSpaces: response.data,
                     addNewBlogSpaceVisible: false
                 })
+            }).catch((error)=>{
+                this.props.showError(error.response.data);
             })
     }
 

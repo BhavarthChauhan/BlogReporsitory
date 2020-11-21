@@ -1,14 +1,20 @@
-package com.adobe.interview.blog.components.login;
+package com.adobe.interview.blog.service;
 
+import com.adobe.interview.blog.components.login.LoginResponseDTO;
 import com.adobe.interview.blog.model.User;
 import com.adobe.interview.blog.repository.UserRepository;
 
 import java.util.List;
 
-public class Login {
+public class UserService {
 
-    public LoginResponseDTO signUserIn(String userName, String password, UserRepository userRepository){
 
+    public UserService(){
+
+    }
+
+
+    public LoginResponseDTO signInUser(UserRepository userRepository, String userName, String password){
         List<User> user = userRepository.getUserByUserName(userName);
 
         if(user.size()==0){
@@ -20,6 +26,7 @@ public class Login {
         }
 
         else return new LoginResponseDTO(true,"All ok");
+
     }
 
     public LoginResponseDTO signUpUser(User user, UserRepository userRepository){

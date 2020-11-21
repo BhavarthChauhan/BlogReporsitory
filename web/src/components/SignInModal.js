@@ -93,7 +93,9 @@ class SignInModal extends React.Component {
                             error: response.data.errorMessage
                         })
                     }
-                })
+                }).catch(error=>{
+                    this.props.showError(error.response.data);
+            })
         } else {
             this.setState({
                 error: errorString
@@ -123,7 +125,9 @@ class SignInModal extends React.Component {
                                 error: response.data.errorMessage
                             });
                         }
-                    })
+                    }).catch((error)=>{
+                        this.props.showError(error.response.data);
+                })
             }
         }
     }

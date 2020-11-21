@@ -36,7 +36,9 @@ class BlogPost extends React.Component {
                                 postDetails: response.data,
                                 visible: true
                             })
-                        })
+                        }).catch((error)=>{
+                            this.props.showError(error.response.data)
+                    })
                 } else {
                     this.setState({
                         postDetails: response.data,
@@ -44,7 +46,9 @@ class BlogPost extends React.Component {
                     })
                 }
 
-            });
+            }).catch((error)=>{
+                this.props.showError(error.response.data);
+        });
 
 
     }
@@ -63,7 +67,9 @@ class BlogPost extends React.Component {
                         comments: response.data,
                         addedComment:''
                     })
-                })
+                }).catch((error)=>{
+                    this.props.showError(error.response.data);
+            });
         }
     }
 
