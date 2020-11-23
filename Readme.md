@@ -5,7 +5,7 @@
 * [Setup](#setup)
 * [Features](#features)
 * [Tests](#tests)
-* [Swim Lane Diagram](#swim--lane-diagram)
+* [Swim Lane Diagram](#swim-lane-diagram)
 * [ER Diagram](#er-diagram)
 * [Acknowledgements](#acknowledgements)
 
