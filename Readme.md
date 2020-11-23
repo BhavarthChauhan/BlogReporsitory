@@ -5,9 +5,9 @@
 * [Setup](#setup)
 * [Features](#features)
 * [Tests](#tests)
-* [Swim Lane Diagram](#swimLane)
-* [ERD Diagram](#erdDiagram)
-* [Acknowledgements](#ack)
+* [Swim Lane Diagram](#swim--lane-diagram)
+* [ER Diagram](#er-diagram)
+* [Acknowledgements](#acknowledgements)
 
 
 
@@ -44,10 +44,10 @@ retain the data once the server shuts down.
 * 
     * I have added react tests under the \_\_test\_\_ folder inside web. You can run the test using npm test.
   
-## Swim  Lane Diagram
+## Swim Lane Diagram
 ![swimlaneImage](Swimlane.png)
 
-## ERD Diagram
+## ER Diagram
 ![erdDiagram](ERDiagram.png)     
   
   
