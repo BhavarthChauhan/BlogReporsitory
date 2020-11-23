@@ -22,6 +22,7 @@ class NavigationBar extends React.Component{
                                   {
                                       this.props.pageTypeVisible ==='blogPosts'?
                                           <Button variant="outline-light"
+                                                  id='viewBlogSpacesButton'
                                                   onClick={this.props.onViewBlogSpacesClick}
                                           >View Blog Spaces</Button>
                                           :
@@ -39,6 +40,7 @@ class NavigationBar extends React.Component{
                                   {
                                       this.props.pageTypeVisible ==='blogPosts'?
                                           <Button variant="outline-light"
+                                                  id='viewBlogSpacesButton'
                                                   onClick={this.props.onViewBlogSpacesClick}
                                           >View Blog Spaces</Button>
                                           :

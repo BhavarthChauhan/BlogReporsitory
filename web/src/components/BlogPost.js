@@ -76,7 +76,7 @@ class BlogPost extends React.Component {
     renderComments() {
         return (
             <div>
-                <Card>
+                <Card id='commentCard'>
                     <Card.Body>
                         <Card.Title>Comments</Card.Title>
                         <Form.Group>
@@ -112,7 +112,7 @@ class BlogPost extends React.Component {
     renderUserLoginCard() {
         return (
             <div>
-                <Card>
+                <Card id='loginCard'>
                     <Card.Body>
                         <Card.Title>Please login to view / add comments</Card.Title>
                     </Card.Body>
@@ -130,7 +130,7 @@ class BlogPost extends React.Component {
                                measure={"%"}>
                             <Row>
                                 <Col lg={8}>
-                                    <Card>
+                                    <Card id='postCard'>
                                         <Card.Body>
                                             <Card.Title>{this.state.postDetails.title}</Card.Title>
                                             <Card.Subtitle

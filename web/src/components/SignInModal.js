@@ -166,7 +166,7 @@ class SignInModal extends React.Component {
                             </Modal.Body>
 
                             <Modal.Footer>
-                                {this.state.error ? <p>{this.state.error}</p> : undefined}
+                                {this.state.error ? <p>{this.state.error}</p>   : <p>hello</p>}
                                 <Button variant="secondary" onClick={this.props.closeSignInModal}>Close</Button>
                                 <Button variant="primary" onClick={this.handleSignInClick}>Sign In</Button>
                             </Modal.Footer>
@@ -205,7 +205,7 @@ class SignInModal extends React.Component {
                             </Modal.Body>
 
                             <Modal.Footer>
-                                {this.state.error ? <p>{this.state.error}</p> : undefined}
+                                {this.state.error ? <p id='errorString'>{this.state.error}</p>:undefined}
                                 <Button variant="secondary" onClick={this.props.closeSignInModal}>Close</Button>
                                 <Button variant="primary" onClick={this.handleSignUpClick}>Create Account</Button>
                             </Modal.Footer>
