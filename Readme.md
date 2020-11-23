@@ -1,5 +1,9 @@
 # Adobe Blog Engine
 
+As per my understanding from the doc I have implemented a blogging application.
+There are blog spaces created by each user and each space can have multiple posts.
+For every post a signed in user can add/ view comments.
+
 ## Content
 
 * [Setup](#setup)
