@@ -8,8 +8,11 @@ import com.adobe.interview.blog.model.Post;
 import com.adobe.interview.blog.model.User;
 import com.adobe.interview.blog.repository.BlogSpaceRepository;
 import com.adobe.interview.blog.repository.PostRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,14 +44,23 @@ public class PostService {
             BlogSpace blogSpace = blogSpaceOptional.get();
             return this.getPosts(postRepository.getPostByBlogSpace(blogSpaceId), blogSpace.getUser(), blogSpace);
         }else{
-            throw  new ResourceNotFoundException("No blog space found");
+            throw  new ResponseStatusException(HttpStatus.NOT_FOUND,"No blog space found");
+        }
+    }
+
+    public List<Post> getPostsByUser(long userId, PostRepository postRepository){
+        List<Post> posts = postRepository.getPostsByUserId(userId);
+        if(posts.isEmpty()){
+            throw  new ResourceNotFoundException("No user found");
+        }else{
+            return posts;
         }
     }
 
     public Post getPostDetails(PostRepository postRepository, long postId){
         List<Post> posts = postRepository.getPostById(postId);
         if(posts.isEmpty()){
-            throw  new ResourceNotFoundException("Post not found");
+            throw  new ResponseStatusException(HttpStatus.NOT_FOUND,"Post not found");
         }else{
             return posts.get(0);
         }
@@ -63,7 +75,7 @@ public class PostService {
             postRepository.save(post);
             return this.getPosts(postRepository.getPostByBlogSpace(blogSpace1.getId()), blogSpace1.getUser(), blogSpace1);
         }else{
-            throw  new ResourceNotFoundException("NO blog space found to save post");
+            throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "NO blog space found to save post");
         }
 
 

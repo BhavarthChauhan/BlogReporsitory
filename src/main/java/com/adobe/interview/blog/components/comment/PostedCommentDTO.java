@@ -13,6 +13,10 @@ public class PostedCommentDTO {
     @JsonProperty("text")
     private String text;
 
+    public PostedCommentDTO(){
+
+    }
+
     public PostedCommentDTO(String userName, long postId, String text) {
         this.userName = userName;
         this.postId = postId;

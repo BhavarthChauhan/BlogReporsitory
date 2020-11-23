@@ -10,6 +10,10 @@ public class LoginResponseDTO {
         this.errorMessage = errorMessage;
     }
 
+    public LoginResponseDTO(){
+
+    }
+
     public boolean isStatusOk() {
         return statusOk;
     }

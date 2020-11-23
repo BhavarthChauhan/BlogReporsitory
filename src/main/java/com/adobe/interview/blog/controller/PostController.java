@@ -48,7 +48,7 @@ public class PostController {
     @GetMapping("postsByUser/{userId}")
     public ResponseEntity getPostByUser(@PathVariable("userId") long userId) {
         try {
-            List<Post> newPostResponseDTO = this.postRepository.getPostsByUserId(userId);
+            List<Post> newPostResponseDTO = this.postService.getPostsByUser(userId, postRepository);
             return new ResponseEntity(newPostResponseDTO, HttpStatus.OK);
         } catch (ResourceNotFoundException e) {
             return ResponseEntity

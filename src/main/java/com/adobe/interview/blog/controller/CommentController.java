@@ -29,7 +29,7 @@ public class CommentController {
 
     @GetMapping("commentsForPost/{postId}")
     public ResponseEntity<List<Comment>> getCommentsForPost(@PathVariable("postId") long postId) {
-        return new ResponseEntity<List<Comment>>(this.commentRepository.getCommentByPostId(postId), HttpStatus.OK);
+        return new ResponseEntity<List<Comment>>(this.commentService.getCommentsForPost(postId, commentRepository), HttpStatus.OK);
     }
 
     @PostMapping("addComment")

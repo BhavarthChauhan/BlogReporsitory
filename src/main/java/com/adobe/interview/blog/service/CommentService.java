@@ -6,6 +6,8 @@ import com.adobe.interview.blog.model.Comment;
 import com.adobe.interview.blog.model.Post;
 import com.adobe.interview.blog.repository.CommentRepository;
 import com.adobe.interview.blog.repository.PostRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -15,11 +17,15 @@ public class CommentService {
 
     }
 
+    public List<Comment> getCommentsForPost(long postId, CommentRepository commentRepository){
+        return commentRepository.getCommentByPostId(postId);
+    }
+
     public List<Comment> addCommentToPost(PostedCommentDTO postedCommentDTO, PostRepository postRepository, CommentRepository commentRepository){
         List<Post> posts = postRepository.getPostById(postedCommentDTO.getPostId()) ;
 
         if(posts.isEmpty()){
-            throw  new ResourceNotFoundException("No post found to add comment");
+            throw  new ResponseStatusException(HttpStatus.NOT_FOUND,"No post found to add comment");
         }else{
             Post post = posts.get(0);
             Comment comment = new Comment(postedCommentDTO.getText(), post.getUser(), post);

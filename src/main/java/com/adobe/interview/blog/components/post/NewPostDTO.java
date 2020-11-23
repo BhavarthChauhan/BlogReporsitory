@@ -22,6 +22,11 @@ public class NewPostDTO {
     @JsonProperty("blogSpaceId")
     private long blogSpaceId;
 
+    public NewPostDTO(){
+
+    }
+
+
     public NewPostDTO( long id, String title, String description, String content, String userName, long blogSpaceId) {
         this.title = title;
         this.description = description;

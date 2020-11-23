@@ -17,6 +17,10 @@ public class NewBlogSpaceDTO {
     private String userName;
 
 
+    public NewBlogSpaceDTO(){
+
+    }
+
     public NewBlogSpaceDTO(String spaceName, String description, String theme, String userName) {
         this.spaceName = spaceName;
         this.description = description;
