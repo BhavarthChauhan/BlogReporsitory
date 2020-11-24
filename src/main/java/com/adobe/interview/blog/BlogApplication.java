@@ -9,17 +9,11 @@ import com.adobe.interview.blog.repository.CommentRepository;
 import com.adobe.interview.blog.repository.PostRepository;
 import com.adobe.interview.blog.repository.UserRepository;
 import com.adobe.interview.blog.utils.SampleData;
-import org.hibernate.annotations.NaturalId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import sun.misc.IOUtils;
 
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 @SpringBootApplication
 public class BlogApplication implements CommandLineRunner {
