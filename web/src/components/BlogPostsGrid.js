@@ -98,7 +98,7 @@ class BlogPostsGrid extends React.Component {
     }
 
     renderAddNewCard() {
-        let theme = this.props.cardTheme ==='Dark'?'secondary':'light';
+        let theme = this.state.spaceTheme ==='Dark'?'secondary':'light';
         if (this.props.isUserLoggedIn && this.loggedInUserCreatedSpace()) {
             return (
                 <div>

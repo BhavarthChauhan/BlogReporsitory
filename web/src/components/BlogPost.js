@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Button from "react-bootstrap/Button";
-
+import Container from "react-bootstrap/Container";
 class BlogPost extends React.Component {
 
     constructor(props) {
@@ -36,8 +36,8 @@ class BlogPost extends React.Component {
                                 postDetails: response.data,
                                 visible: true
                             })
-                        }).catch((error)=>{
-                            this.props.showError(error.response.data)
+                        }).catch((error) => {
+                        this.props.showError(error.response.data)
                     })
                 } else {
                     this.setState({
@@ -46,8 +46,8 @@ class BlogPost extends React.Component {
                     })
                 }
 
-            }).catch((error)=>{
-                this.props.showError(error.response.data);
+            }).catch((error) => {
+            this.props.showError(error.response.data);
         });
 
 
@@ -65,17 +65,17 @@ class BlogPost extends React.Component {
                 .then((response) => {
                     this.setState({
                         comments: response.data,
-                        addedComment:''
+                        addedComment: ''
                     })
-                }).catch((error)=>{
-                    this.props.showError(error.response.data);
+                }).catch((error) => {
+                this.props.showError(error.response.data);
             });
         }
     }
 
     renderComments() {
         return (
-            <div>
+            <div >
                 <Card id='commentCard'>
                     <Card.Body>
                         <Card.Title>Comments</Card.Title>
@@ -89,20 +89,22 @@ class BlogPost extends React.Component {
                             Submit
                         </Button>
                         <br/> <br/>
-                        {
-                            this.state.comments.map(comment =>
-                                <div>
-                                    <Card>
+                        <div className="scroll fixedHeight" >
+                            {
+                                this.state.comments.map(comment =>
+                                    <div>
+                                        <Card>
+                                            <br/>
+                                            <Card.Subtitle className="mb-2 text-muted" style={{textAlign: 'left'}}>
+                                                Comment by : {comment.user.name}
+                                            </Card.Subtitle>
+                                            <Card.Body>{comment.text}</Card.Body>
+                                        </Card>
                                         <br/>
-                                        <Card.Subtitle className="mb-2 text-muted" style={{textAlign: 'left'}}>
-                                            Comment by : {comment.user.name}
-                                        </Card.Subtitle>
-                                        <Card.Body>{comment.text}</Card.Body>
-                                    </Card>
-                                    <br/>
-                                </div>
-                            )
-                        }
+                                    </div>
+                                )
+                            }
+                        </div>
                     </Card.Body>
                 </Card>
             </div>
@@ -128,28 +130,30 @@ class BlogPost extends React.Component {
                     <div>
                         <Rodal visible={this.state.visible} onClose={this.props.closeBlogPost} height={100} width={100}
                                measure={"%"}>
-                            <Row>
-                                <Col lg={8}>
-                                    <Card id='postCard'>
-                                        <Card.Body>
-                                            <Card.Title>{this.state.postDetails.title}</Card.Title>
-                                            <Card.Subtitle
-                                                className="mb-2 text-muted">{this.state.postDetails.description}</Card.Subtitle>
-                                            <Card.Text>
-                                                {this.state.postDetails.content}
-                                            </Card.Text>
+                          <Container>
+                              <Row>
+                                  <Col lg={8}>
+                                      <Card id='postCard'>
+                                          <Card.Body>
+                                              <Card.Title>{this.state.postDetails.title}</Card.Title>
+                                              <Card.Subtitle
+                                                  className="mb-2 text-muted">{this.state.postDetails.description}</Card.Subtitle>
+                                              <Card.Text>
+                                                  {this.state.postDetails.content}
+                                              </Card.Text>
 
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                                <Col lg={4}>
-                                    {this.props.userLoggedIn ?
-                                        this.renderComments()
-                                        :
-                                        this.renderUserLoginCard()
-                                    }
-                                </Col>
-                            </Row>
+                                          </Card.Body>
+                                      </Card>
+                                  </Col>
+                                  <Col lg={4}>
+                                      {this.props.userLoggedIn ?
+                                          this.renderComments()
+                                          :
+                                          this.renderUserLoginCard()
+                                      }
+                                  </Col>
+                              </Row>
+                          </Container>
                         </Rodal>
                     </div>
                     : undefined
