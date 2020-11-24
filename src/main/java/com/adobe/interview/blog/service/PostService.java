@@ -21,6 +21,13 @@ public class PostService {
     public PostService() {
     }
 
+    /**
+     * Gets all the posts for a blogSpace
+     * @param posts list of posts from db
+     * @param user User who created the blog space
+     * @param blogSpace blog space to which the post belongs to
+     * @return
+     */
     public NewPostResponseDTO getPosts(List<Post> posts, User user, BlogSpace blogSpace){
 
         NewPostResponseDTO newPostResponseDTO = new NewPostResponseDTO();
@@ -37,6 +44,13 @@ public class PostService {
         return  newPostResponseDTO;
     }
 
+    /**
+     * Gets all the posts by blog space
+     * @param blogSpaceId blogSpace id
+     * @param blogSpaceRepository repo object of blogSpace table
+     * @param postRepository repo object of post table
+     * @return
+     */
     public NewPostResponseDTO getAllPostsBySpace(long blogSpaceId, BlogSpaceRepository blogSpaceRepository, PostRepository postRepository){
 
         Optional<BlogSpace> blogSpaceOptional = blogSpaceRepository.findById(blogSpaceId);
@@ -48,6 +62,12 @@ public class PostService {
         }
     }
 
+    /**
+     * Gets all the posts by a user
+     * @param userId userID of the user
+     * @param postRepository repo object of post table
+     * @return
+     */
     public List<Post> getPostsByUser(long userId, PostRepository postRepository){
         List<Post> posts = postRepository.getPostsByUserId(userId);
         if(posts.isEmpty()){
@@ -57,6 +77,13 @@ public class PostService {
         }
     }
 
+    /**
+     *
+     * Gets details of the post like title, description, content,
+     * @param postRepository repo object of post table
+     * @param postId id of the post
+     * @return
+     */
     public Post getPostDetails(PostRepository postRepository, long postId){
         List<Post> posts = postRepository.getPostById(postId);
         if(posts.isEmpty()){
@@ -66,6 +93,13 @@ public class PostService {
         }
     }
 
+    /**
+     * Adds a new post to the blog space
+     * @param newPostDTO details of the added post
+     * @param blogSpaceRepository repo object of blogSpace table
+     * @param postRepository repo object of post table
+     * @return
+     */
     public NewPostResponseDTO addNewPost(NewPostDTO newPostDTO, BlogSpaceRepository  blogSpaceRepository, PostRepository postRepository){
 
         Optional<BlogSpace> blogSpaceOptional = blogSpaceRepository.findById(newPostDTO.getBlogSpaceId());

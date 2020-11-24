@@ -22,6 +22,12 @@ public class CommentService {
 
     }
 
+    /**
+     * Gets all the comment for the provided post id
+     * @param postId postId of the post
+     * @param commentRepository repo object of comment table
+     * @return
+     */
     public List<CommentResponseDTO> getCommentsForPost(long postId, CommentRepository commentRepository) {
         List<Comment> comments = commentRepository.getCommentByPostId(postId);
         List<CommentResponseDTO> commentResponseDTOS = new ArrayList<>();
@@ -32,6 +38,14 @@ public class CommentService {
         return commentResponseDTOS;
     }
 
+    /**
+     * Adds a new comment to the post
+     * @param postedCommentDTO comment with details
+     * @param postRepository repo object of post table
+     * @param commentRepository repo object of comment table
+     * @param userRepository repo object of user table
+     * @return
+     */
     public List<CommentResponseDTO> addCommentToPost(PostedCommentDTO postedCommentDTO, PostRepository postRepository,
                                           CommentRepository commentRepository, UserRepository userRepository) {
         List<Post> posts = postRepository.getPostById(postedCommentDTO.getPostId());

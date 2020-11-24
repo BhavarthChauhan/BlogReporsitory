@@ -32,7 +32,11 @@ public class PostController {
     @Autowired
     private BlogSpaceRepository blogSpaceRepository;
 
-
+    /**
+     * Gets all the posts in the blogSpace
+     * @param blogSpaceId id of the blogSpace
+     * @return
+     */
     @GetMapping("allPostsByBlogSpace/{blogSpaceId}")
     public ResponseEntity getAllPosts(@PathVariable("blogSpaceId") long blogSpaceId) {
         try {
@@ -45,6 +49,11 @@ public class PostController {
         }
     }
 
+    /**
+     * Gets all the posts by user
+     * @param userId userId of the user
+     * @return
+     */
     @GetMapping("postsByUser/{userId}")
     public ResponseEntity getPostByUser(@PathVariable("userId") long userId) {
         try {
@@ -58,6 +67,11 @@ public class PostController {
 
     }
 
+    /**
+     * Gets blog post details for the post, the title, description, content
+     * @param postId id of the post
+     * @return
+     */
     @GetMapping("postDetails/{postId}")
     public ResponseEntity getPostById(@PathVariable("postId") long postId) {
         try {
@@ -70,6 +84,11 @@ public class PostController {
         }
     }
 
+    /**
+     * Saves a post added by the user
+     * @param newPost post object with post details
+     * @return
+     */
     @PostMapping("addPost")
     public ResponseEntity addNewPost(@RequestBody NewPostDTO newPost) {
         try {

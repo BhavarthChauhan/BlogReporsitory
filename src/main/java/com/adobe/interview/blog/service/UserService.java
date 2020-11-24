@@ -13,7 +13,13 @@ public class UserService {
 
     }
 
-
+    /**
+     * Signins in the user by checking is userName exists and if password is correct
+     * @param userRepository repo object of user table
+     * @param userName userName
+     * @param password password
+     * @return
+     */
     public LoginResponseDTO signInUser(UserRepository userRepository, String userName, String password){
         List<User> user = userRepository.getUserByUserName(userName);
 
@@ -29,6 +35,12 @@ public class UserService {
 
     }
 
+    /**
+     * Creates new account of the user if userName does not exists
+     * @param user user details
+     * @param userRepository repo object of user table
+     * @return
+     */
     public LoginResponseDTO signUpUser(User user, UserRepository userRepository){
         List<User> users = userRepository.getUserByUserName(user.getUserName());
         if(users.isEmpty()){

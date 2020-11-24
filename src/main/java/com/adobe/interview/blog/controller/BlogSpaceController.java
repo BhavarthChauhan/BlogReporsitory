@@ -30,6 +30,10 @@ public class BlogSpaceController {
 
     BlogService blogService = new BlogService();
 
+    /**
+     * Returns all blog spaces present
+     * @return
+     */
     @GetMapping("allBlogSpaces")
     public ResponseEntity getAllBlogSpaces() {
 
@@ -44,6 +48,11 @@ public class BlogSpaceController {
         }
     }
 
+    /**
+     * Adds a new blog space to the db
+     * @param newBlogSpace newBlogSpace object with space details
+     * @return
+     */
     @PostMapping("addNewBlogSpace")
     public ResponseEntity addNewBlogSpace(@RequestBody NewBlogSpaceDTO newBlogSpace) {
         try{

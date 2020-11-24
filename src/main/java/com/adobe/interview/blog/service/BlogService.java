@@ -22,7 +22,11 @@ public class BlogService {
 
     }
 
-
+    /**
+     * Gets all blog spaces in the db
+     * @param blogSpaceRepository repo object of table BlogSpace
+     * @return
+     */
     public List<BlogSpaceResponseDTO> getAllBlogSpaces(BlogSpaceRepository blogSpaceRepository) {
         List<BlogSpace> blogSpaces = blogSpaceRepository.findAll();
 
@@ -38,6 +42,13 @@ public class BlogService {
         return blogSpaceResponseDTOS;
     }
 
+    /**
+     * Adds new blog space created by a user
+     * @param newBlogSpaceDTO new blog space details
+     * @param userRepository repo object of the user table
+     * @param blogSpaceRepository repo object of the blog table
+     * @return
+     */
     public List<BlogSpaceResponseDTO> addNewBlogSpace(NewBlogSpaceDTO newBlogSpaceDTO, UserRepository userRepository, BlogSpaceRepository blogSpaceRepository) {
         List<User> users = userRepository.getUserByUserName(newBlogSpaceDTO.getUserName());
 

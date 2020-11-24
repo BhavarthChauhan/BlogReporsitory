@@ -30,11 +30,21 @@ public class CommentController {
     @Autowired
     UserRepository userRepository;
 
+    /**
+     * Gets all the comments for the post
+     * @param postId postId of the post
+     * @return
+     */
     @GetMapping("commentsForPost/{postId}")
     public ResponseEntity<List<CommentResponseDTO>> getCommentsForPost(@PathVariable("postId") long postId) {
         return new ResponseEntity<List<CommentResponseDTO>>(this.commentService.getCommentsForPost(postId, commentRepository), HttpStatus.OK);
     }
 
+    /**
+     * Adds a comment to the post and saves in db
+     * @param postedComment comment object with text and postId
+     * @return
+     */
     @PostMapping("addComment")
     public ResponseEntity addCommentToPost(@RequestBody PostedCommentDTO postedComment) {
         try{

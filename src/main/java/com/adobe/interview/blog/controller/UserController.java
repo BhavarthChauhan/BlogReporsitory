@@ -24,7 +24,12 @@ public class UserController {
     private UserRepository userRepository;
 
 
-
+    /**
+     * Signs in user
+     * @param userName userName of the user
+     * @param password password of the user
+     * @return
+     */
     @GetMapping(value = "signIn/{userName}/{password}")
     public ResponseEntity signInUser(@PathVariable("userName") String userName, @PathVariable("password")String password ){
         try {
@@ -38,6 +43,11 @@ public class UserController {
 
     }
 
+    /**
+     * Signs up the user and creates the account
+     * @param user details of the user
+     * @return
+     */
     @PostMapping(value="/signUp"  ,headers="Accept=application/json")
     public ResponseEntity signUpUser(@RequestBody User user){
         try {
