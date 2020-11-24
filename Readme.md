@@ -60,4 +60,5 @@ retain the data once the server shuts down.
 * Initialized spring boot application using [spring initializer](https://start.spring.io/)
 * Used [react-responsive-grid](https://github.com/STRML/react-grid-layout) to show all the blog cards
 * Wrote react tests using [enzyme](https://enzymejs.github.io/enzyme/).
+* User [mockito](https://site.mockito.org/) to mock service db calls in junit.
 
