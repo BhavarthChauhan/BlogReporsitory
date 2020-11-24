@@ -29,12 +29,16 @@
 }
 
 .scroll {
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 100%;
 }
 
 .fixedHeight {
   height: 380px;
+}
+
+.longFixedHeight{
+  height: 30rem;
 }
 @keyframes App-logo-spin {
   from {

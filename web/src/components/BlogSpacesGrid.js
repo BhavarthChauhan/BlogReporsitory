@@ -107,7 +107,7 @@ class BlogSpacesGrid extends React.Component {
         if (this.props.isUserLoggedIn) {
             return (
                 <div>
-                    <Card>
+                    <Card style={{height:'10rem'}}  >
                         <Card.Body>
                             <Card.Title>Add new blog space</Card.Title>
                             <Card.Text>
@@ -121,7 +121,7 @@ class BlogSpacesGrid extends React.Component {
         } else {
             return (
                 <div>
-                    <Card>
+                    <Card style={{height:'10rem'}}  >
                         <Card.Body>
                             <Card.Title>Login to add a new blog space</Card.Title>
 
@@ -156,6 +156,7 @@ class BlogSpacesGrid extends React.Component {
                                     blogSapceId={blogSpace.id}
                                     showPosts={this.props.showPostsForBlogSpace}
                                     key={blogSpace.id}
+                                    createdBy={blogSpace.createdBy}
                                 />
                             </div>
                         </div>

@@ -2,7 +2,6 @@ import React from "react";
 import NavigationBar from "./NavigationBar";
 import SignInModal from "./SignInModal";
 import BlogPostsGrid from "./BlogPostsGrid";
-import BlogPost from "./BlogPost";
 import BlogSpacesGrid from "./BlogSpacesGrid";
 import ErrorModal from "./ErrorModal";
 

@@ -98,11 +98,11 @@ class BlogPostsGrid extends React.Component {
     }
 
     renderAddNewCard() {
-        let theme = this.state.spaceTheme ==='Dark'?'secondary':'light';
+        let theme = this.state.spaceTheme;
         if (this.props.isUserLoggedIn && this.loggedInUserCreatedSpace()) {
             return (
                 <div>
-                    <Card bg={theme}>
+                    <Card bg={theme} style={{height:'10rem'}} >
                         <Card.Body>
                             <Card.Title>Add new post</Card.Title>
                             <Card.Text>
@@ -116,7 +116,7 @@ class BlogPostsGrid extends React.Component {
         } else if (!this.props.isUserLoggedIn) {
             return (
                 <div>
-                    <Card  bg={theme}>
+                    <Card  bg={theme} style={{height:'10rem'}}>
                         <Card.Body>
                             <Card.Title>Login to add a new post if space created by you</Card.Title>
 

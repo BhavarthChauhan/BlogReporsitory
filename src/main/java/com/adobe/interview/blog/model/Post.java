@@ -25,7 +25,7 @@ public class Post {
     @JsonProperty(value = "description")
     private String description;
 
-    @Column(name = "content")
+    @Column(name = "content", columnDefinition = "TEXT")
     @JsonProperty(value = "content")
     private String content;
 

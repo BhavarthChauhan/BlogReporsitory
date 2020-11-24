@@ -3,7 +3,14 @@ import Rodal from "rodal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-
+let colorMapping = {
+    'Blue':'primary',
+    'Green':'success',
+    'Red':'danger',
+    'Yellow':'warning',
+    'Light':'light',
+    'Dark':'secondary'
+};
 class AddNewBlogSpace extends React.Component {
 
     constructor(props) {
@@ -12,7 +19,7 @@ class AddNewBlogSpace extends React.Component {
         this.state={
             spaceName:'',
             description:'',
-            theme:'Light',
+            theme:'Blue',
             error:undefined
         };
 
@@ -23,7 +30,7 @@ class AddNewBlogSpace extends React.Component {
     }
     onSpaceNameChange(e){
         this.setState({
-            spaceName:e.target.value
+            spaceName: e.target.value
         })
     }
 
@@ -35,7 +42,7 @@ class AddNewBlogSpace extends React.Component {
 
     onDropDownChange(e){
        this.setState({
-           theme:e.target.value
+           theme:colorMapping[e.target.value]
        })
     }
 
@@ -72,6 +79,10 @@ class AddNewBlogSpace extends React.Component {
                             <Form.Group>
                                 <Form.Label>Blog space theme</Form.Label>
                                     <Form.Control as="select" onChange={this.onDropDownChange}>
+                                        <option>Blue</option>
+                                        <option>Green</option>
+                                        <option>Red</option>
+                                        <option>Yellow</option>
                                         <option>Light</option>
                                         <option>Dark</option>
                                     </Form.Control>

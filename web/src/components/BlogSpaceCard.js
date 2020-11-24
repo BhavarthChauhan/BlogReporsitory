@@ -20,9 +20,9 @@ class BlogSpaceCard extends React.Component{
     render() {
         return (
             <div>
-                <Card >
+                <Card style={{height:'10rem'}}   >
                     <Card.Body>
-                        <Card.Title>{this.props.cardTitle}</Card.Title>
+                        <Card.Subtitle>{this.props.cardTitle} by {this.props.createdBy}</Card.Subtitle>
                         <Card.Text>
                             {this.props.cardDescription}
                         </Card.Text>

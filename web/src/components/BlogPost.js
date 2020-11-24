@@ -80,7 +80,7 @@ class BlogPost extends React.Component {
                     <Card.Body>
                         <Card.Title>Comments</Card.Title>
                         <Form.Group>
-                            <Form.Control size="lg" type="text" placeholder="Add Comment"
+                            <Form.Control size="lg" type="text"  value={this.state.addedComment}  placeholder="Add Comment"
                                           onChange={this.handleCommentChange}/>
 
                         </Form.Group>
@@ -96,7 +96,7 @@ class BlogPost extends React.Component {
                                         <Card>
                                             <br/>
                                             <Card.Subtitle className="mb-2 text-muted" style={{textAlign: 'left'}}>
-                                                Comment by : {comment.user.name}
+                                                Comment by : {comment.commentBy}
                                             </Card.Subtitle>
                                             <Card.Body>{comment.text}</Card.Body>
                                         </Card>
@@ -132,12 +132,15 @@ class BlogPost extends React.Component {
                                measure={"%"}>
                           <Container>
                               <Row>
-                                  <Col lg={8}>
+                                  <Col lg={8} className="scroll longFixedHeight">
                                       <Card id='postCard'>
                                           <Card.Body>
                                               <Card.Title>{this.state.postDetails.title}</Card.Title>
-                                              <Card.Subtitle
-                                                  className="mb-2 text-muted">{this.state.postDetails.description}</Card.Subtitle>
+                                              <Card.Subtitle className="mb-2 text-muted">
+                                                  {this.state.postDetails.description}
+                                                  <br/>
+                                                  <p>Post by: {this.state.postDetails.user.name}</p>
+                                              </Card.Subtitle>
                                               <Card.Text>
                                                   {this.state.postDetails.content}
                                               </Card.Text>

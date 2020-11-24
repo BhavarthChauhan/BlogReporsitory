@@ -30,7 +30,7 @@ For every post a signed in user can add/ view comments.
     * run npm start to start the front end server, this should start the app at localhost:3000 
 
 I have pre-populated the database with some dummy users, blog spaces and comments.
-To login you can use the following credentials - userName - user1, password - userPassword (case sensitive)
+**To login you can use the following credentials - userName - user1, password - userPassword (case sensitive)**
 I have used h2 database to store the in session data, as I did not want reviewer to go through the process of setting up the database.
 Due to this, once the app is shutdown, the data would be lost, for actual apps I would connect to another database server which would
 retain the data once the server shuts down.

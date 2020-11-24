@@ -57,7 +57,7 @@ public class CommentControllerTests {
         PostedCommentDTO postedCommentDTO = new PostedCommentDTO("testUser",1,"testText");
 
         Mockito.when(
-                commentService.addCommentToPost(Mockito.any(), Mockito.any(), Mockito.any())
+                commentService.addCommentToPost(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any())
         ).thenReturn(new ArrayList<>());
 
         mockMvc.perform(post("/api/addComment")
@@ -71,7 +71,7 @@ public class CommentControllerTests {
         PostedCommentDTO postedCommentDTO = new PostedCommentDTO("testUser",1,"testText");
 
         Mockito.when(
-                commentService.addCommentToPost(Mockito.any(), Mockito.any(), Mockito.any())
+                commentService.addCommentToPost(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any())
         ).thenThrow(new ResourceNotFoundException("exception"));
 
         mockMvc.perform(post("/api/addComment")

@@ -1,11 +1,13 @@
 package com.adobe.interview.blog.service;
 
 
+import com.adobe.interview.blog.components.comment.CommentResponseDTO;
 import com.adobe.interview.blog.components.comment.PostedCommentDTO;
 import com.adobe.interview.blog.exception.ResourceNotFoundException;
 import com.adobe.interview.blog.model.Comment;
 import com.adobe.interview.blog.repository.CommentRepository;
 import com.adobe.interview.blog.repository.PostRepository;
+import com.adobe.interview.blog.repository.UserRepository;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +30,8 @@ public class CommentServiceTests {
     @Autowired
     CommentRepository commentRepository;
 
+    @Autowired
+    UserRepository userRepository;
     CommentService commentService  = new CommentService();
 
     private static final long POST_ID_IN_DB   = 1;
@@ -36,31 +40,31 @@ public class CommentServiceTests {
 
     @Test
     public void commentsForPostFetched(){
-        List<Comment> comments = this.commentService.getCommentsForPost(POST_ID_IN_DB,commentRepository);
+        List<CommentResponseDTO> comments = this.commentService.getCommentsForPost(POST_ID_IN_DB,commentRepository);
         Assert.assertNotNull(comments);
         Assert.assertTrue(comments.size()>0);
     }
 
     @Test
     public void commentsForNonAvailablePostFetched(){
-        List<Comment> comments = this.commentService.getCommentsForPost(POST_ID_NOT_IN_DB,commentRepository);
+        List<CommentResponseDTO> comments = this.commentService.getCommentsForPost(POST_ID_NOT_IN_DB,commentRepository);
         Assert.assertNotNull(comments);
         Assert.assertEquals(0, comments.size());
     }
 
     @Test
     public void newCommentAddedToPost(){
-        List<Comment> commentsBefore = this.commentService.getCommentsForPost(POST_ID_IN_DB,commentRepository);
+        List<CommentResponseDTO> commentsBefore = this.commentService.getCommentsForPost(POST_ID_IN_DB,commentRepository);
         PostedCommentDTO postedCommentDTO = new PostedCommentDTO("user1", POST_ID_IN_DB,"testComment");
 
-        this.commentService.addCommentToPost(postedCommentDTO, postRepository, commentRepository);
-        List<Comment> commentsAfter = this.commentService.getCommentsForPost(POST_ID_IN_DB,commentRepository);
+        this.commentService.addCommentToPost(postedCommentDTO, postRepository, commentRepository, userRepository);
+        List<CommentResponseDTO> commentsAfter = this.commentService.getCommentsForPost(POST_ID_IN_DB,commentRepository);
 
 
         Assert.assertEquals(commentsBefore.size()+1, commentsAfter.size());
 
-        Comment addedComment = null;
-        for(Comment comment: commentsAfter){
+        CommentResponseDTO addedComment = null;
+        for(CommentResponseDTO comment: commentsAfter){
             if(comment.getText().equals("testComment"))
                 addedComment= comment;
         }
@@ -71,7 +75,7 @@ public class CommentServiceTests {
     public void commentAddedForPostNotInDB(){
         try{
             PostedCommentDTO postedCommentDTO = new PostedCommentDTO("user1", POST_ID_NOT_IN_DB,"testComment");
-            this.commentService.addCommentToPost(postedCommentDTO, postRepository, commentRepository);
+            this.commentService.addCommentToPost(postedCommentDTO, postRepository, commentRepository,userRepository);
             fail("No exception thrown");
         }catch (ResourceNotFoundException e){
             Assert.assertEquals("No post found to add comment", e.getMessage());

@@ -31,7 +31,7 @@ public class BlogService {
         for (BlogSpace blogSpace : blogSpaces) {
             BlogSpaceResponseDTO blogSpaceResponseDTO = new BlogSpaceResponseDTO(String.valueOf(blogSpace.getId()),
                     blogSpace.getId(), blogSpace.getSpaceName(), blogSpace.getDescription(),
-                    blogSpace.getTheme(), blogSpace.getUser().getUserName());
+                    blogSpace.getTheme(), blogSpace.getUser().getName());
             blogSpaceResponseDTOS.add(blogSpaceResponseDTO);
         }
 
