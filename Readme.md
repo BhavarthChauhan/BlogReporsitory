@@ -3,6 +3,7 @@
 As per my understanding from the doc I have implemented a blogging application.
 There are blog spaces created by each user and each space can have multiple posts.
 For every post a signed in user can add/ view comments.
+I have created a [demo video file](https://drive.google.com/file/d/1BVoF2wOb5QRGtAy1WEWoJlfbKifQwtmk/view?usp=sharing) in case the project does not setup as required.
 
 ## Content
 
