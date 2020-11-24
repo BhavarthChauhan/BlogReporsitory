@@ -20,7 +20,7 @@ describe('Blog post card component',()=>{
             cardTheme:'Dark'
         });
         const card = wrapper.find(Card);
-        expect(card.prop('bg')).toBe('secondary');
+        expect(card.prop('bg')).toBe('Dark');
     })
 
 

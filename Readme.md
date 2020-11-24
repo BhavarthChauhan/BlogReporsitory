@@ -44,9 +44,9 @@ retain the data once the server shuts down.
 
 ## Tests
 * Junit tests
-    * I have added junit tests for the service and controller classes written.
-* 
-    * I have added react tests under the \_\_test\_\_ folder inside web. You can run the test using npm test.
+    * I have added junit tests for the service and controller classes written. You can run them using maven test command.
+* React enzyme tests
+    * I have added react tests under the \_\_tests\_\_ folder inside web. You can run the test using npm test.
   
 ## Swim Lane Diagram
 ![swimlaneImage](Swimlane.png)

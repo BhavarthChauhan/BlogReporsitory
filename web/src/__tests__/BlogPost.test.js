@@ -9,12 +9,15 @@ describe("Blog post component",()=>{
         const wrapper = shallow(<BlogPost/>);
         wrapper.setState({
             postDetails:{
-                title:'testTitle'
+                title:'testTitle',
+                user:{
+                    name:'testName'
+                }
             }
         });
 
         const card = wrapper.find('#postCard');
-        expect(card.text()).toBe('testTitle');
+        expect(card.text()).toContain('testTitle');
     });
 
     it('shows login card when userNotLoggedIn',()=>{
@@ -38,4 +41,4 @@ describe("Blog post component",()=>{
 
     })
 
-})
+});

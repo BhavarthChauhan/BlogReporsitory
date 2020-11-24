@@ -18,7 +18,7 @@ public class UserServiceTests {
     private static final String UNKNOWN_USER_NAME = "unknownUserName";
     private static final String KNOWN_USER_NAME = "user1";
     private static final String INCORRECT_PASSWORD = "pass";
-    private static final String CORRECT_PASSWORD = "pass1";
+    private static final String CORRECT_PASSWORD = "userPassword";
     private static final String TEST_NAME = "testName";
 
     @Autowired
