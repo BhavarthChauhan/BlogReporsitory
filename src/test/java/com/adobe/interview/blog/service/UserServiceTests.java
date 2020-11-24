@@ -3,9 +3,8 @@ package com.adobe.interview.blog.service;
 import com.adobe.interview.blog.components.login.LoginResponseDTO;
 import com.adobe.interview.blog.model.User;
 import com.adobe.interview.blog.repository.UserRepository;
-import com.adobe.interview.blog.service.UserService;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -14,9 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@SpringBootTest
-class UserServiceTest {
-
+public class UserServiceTests {
 
     private static final String UNKNOWN_USER_NAME = "unknownUserName";
     private static final String KNOWN_USER_NAME = "user1";

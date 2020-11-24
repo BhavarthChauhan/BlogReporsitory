@@ -44,7 +44,7 @@ public class PostService {
             BlogSpace blogSpace = blogSpaceOptional.get();
             return this.getPosts(postRepository.getPostByBlogSpace(blogSpaceId), blogSpace.getUser(), blogSpace);
         }else{
-            throw  new ResponseStatusException(HttpStatus.NOT_FOUND,"No blog space found");
+            throw  new ResourceNotFoundException("No blog space found");
         }
     }
 
@@ -60,7 +60,7 @@ public class PostService {
     public Post getPostDetails(PostRepository postRepository, long postId){
         List<Post> posts = postRepository.getPostById(postId);
         if(posts.isEmpty()){
-            throw  new ResponseStatusException(HttpStatus.NOT_FOUND,"Post not found");
+            throw  new ResourceNotFoundException("Post not found");
         }else{
             return posts.get(0);
         }
@@ -75,7 +75,7 @@ public class PostService {
             postRepository.save(post);
             return this.getPosts(postRepository.getPostByBlogSpace(blogSpace1.getId()), blogSpace1.getUser(), blogSpace1);
         }else{
-            throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "NO blog space found to save post");
+            throw  new ResourceNotFoundException("NO blog space found to save post");
         }
 
 

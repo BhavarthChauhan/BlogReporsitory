@@ -6,8 +6,9 @@ import com.adobe.interview.blog.components.blogSpace.NewBlogSpaceDTO;
 import com.adobe.interview.blog.exception.ResourceNotFoundException;
 import com.adobe.interview.blog.service.BlogService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -26,9 +27,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 
-
 @SpringBootTest
-public class BlogSpaceControllerTest {
+public class BlogSpaceControllerTests {
 
     private MockMvc mockMvc;
 
@@ -40,7 +40,7 @@ public class BlogSpaceControllerTest {
 
     ObjectMapper objectMapper = new ObjectMapper();
 
-    @Before
+    @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
         this.mockMvc = MockMvcBuilders.standaloneSetup(blogSpaceController).build();

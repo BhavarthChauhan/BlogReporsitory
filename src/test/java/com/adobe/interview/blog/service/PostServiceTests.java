@@ -8,12 +8,10 @@ import com.adobe.interview.blog.model.Post;
 import com.adobe.interview.blog.repository.BlogSpaceRepository;
 import com.adobe.interview.blog.repository.PostRepository;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -23,8 +21,7 @@ import static junit.framework.Assert.fail;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@SpringBootTest
-public class PostServiceTest {
+public class PostServiceTests {
 
     private static final long BLOG_SPACE_ID_IN_DB = 1;
     private static final long BLOG_SPACE_ID_NOT_IN_DB = 10;
@@ -68,8 +65,8 @@ public class PostServiceTest {
         try{
             NewPostResponseDTO newPostResponseDTO = this.postService.getAllPostsBySpace(BLOG_SPACE_ID_NOT_IN_DB,  blogSpaceRepository, postRepository);
             fail("No exception thrown");
-        }catch (ResponseStatusException e) {
-            Assert.assertEquals("No blog space found", e.getReason());
+        }catch (ResourceNotFoundException e) {
+            Assert.assertEquals("No blog space found", e.getMessage());
         }
     }
 
@@ -85,8 +82,8 @@ public class PostServiceTest {
         try{
             Post post = this.postService.getPostDetails(postRepository, POST_ID_NOT_IN_DB);
             fail("No exception thrown");
-        }catch(ResponseStatusException e) {
-            Assert.assertEquals("Post not found", e.getReason());
+        }catch(ResourceNotFoundException e) {
+            Assert.assertEquals("Post not found", e.getMessage());
         }
     }
 
@@ -114,8 +111,8 @@ public class PostServiceTest {
             NewPostDTO newPostDTO = new NewPostDTO(6, "testTitle","testDescription","testContent","user1",BLOG_SPACE_ID_NOT_IN_DB);
             this.postService.addNewPost(newPostDTO, blogSpaceRepository, postRepository);
             fail("No exception thrown");
-        }catch (ResponseStatusException e){
-            Assert.assertEquals("NO blog space found to save post", e.getReason());
+        }catch (ResourceNotFoundException e){
+            Assert.assertEquals("NO blog space found to save post", e.getMessage());
         }
     }
 

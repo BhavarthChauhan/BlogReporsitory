@@ -42,7 +42,7 @@ public class BlogService {
         List<User> users = userRepository.getUserByUserName(newBlogSpaceDTO.getUserName());
 
         if (users.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+            throw new ResourceNotFoundException("User not found");
         } else {
             User user = users.get(0);
             BlogSpace blogSpace = new BlogSpace(newBlogSpaceDTO.getSpaceName(), newBlogSpaceDTO.getDescription(), newBlogSpaceDTO.getTheme(), user);

@@ -9,6 +9,7 @@ import com.adobe.interview.blog.repository.PostRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.management.relation.RelationSupport;
 import java.util.List;
 
 public class CommentService {
@@ -25,7 +26,7 @@ public class CommentService {
         List<Post> posts = postRepository.getPostById(postedCommentDTO.getPostId()) ;
 
         if(posts.isEmpty()){
-            throw  new ResponseStatusException(HttpStatus.NOT_FOUND,"No post found to add comment");
+            throw  new ResourceNotFoundException("No post found to add comment");
         }else{
             Post post = posts.get(0);
             Comment comment = new Comment(postedCommentDTO.getText(), post.getUser(), post);

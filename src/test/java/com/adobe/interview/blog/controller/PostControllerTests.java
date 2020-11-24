@@ -4,11 +4,10 @@ import com.adobe.interview.blog.components.post.NewPostDTO;
 import com.adobe.interview.blog.components.post.NewPostResponseDTO;
 import com.adobe.interview.blog.exception.ResourceNotFoundException;
 import com.adobe.interview.blog.model.Post;
-import com.adobe.interview.blog.repository.PostRepository;
 import com.adobe.interview.blog.service.PostService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -25,8 +24,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-public class PostControllerTest {
+
+public class PostControllerTests {
 
     private MockMvc mockMvc;
 
@@ -38,7 +37,7 @@ public class PostControllerTest {
 
     ObjectMapper objectMapper = new ObjectMapper();
 
-    @Before
+    @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
         this.mockMvc = MockMvcBuilders.standaloneSetup(postController).build();

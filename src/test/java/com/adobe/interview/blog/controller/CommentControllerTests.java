@@ -4,13 +4,12 @@ import com.adobe.interview.blog.components.comment.PostedCommentDTO;
 import com.adobe.interview.blog.exception.ResourceNotFoundException;
 import com.adobe.interview.blog.service.CommentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -21,8 +20,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-public class CommentControllerTest {
+
+public class CommentControllerTests {
 
     private MockMvc mockMvc;
 
@@ -36,7 +35,7 @@ public class CommentControllerTest {
 
     ObjectMapper objectMapper = new ObjectMapper();
 
-    @Before
+    @BeforeEach
     public void setup(){
         MockitoAnnotations.initMocks(this);
         this.mockMvc = MockMvcBuilders.standaloneSetup(commentController).build();

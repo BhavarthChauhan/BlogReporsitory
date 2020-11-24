@@ -7,13 +7,11 @@ import com.adobe.interview.blog.model.Comment;
 import com.adobe.interview.blog.repository.CommentRepository;
 import com.adobe.interview.blog.repository.PostRepository;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.ResponseExtractor;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -22,8 +20,7 @@ import static junit.framework.Assert.fail;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@SpringBootTest
-public class CommentServiceTest {
+public class CommentServiceTests {
 
     @Autowired
     PostRepository postRepository;
@@ -76,8 +73,8 @@ public class CommentServiceTest {
             PostedCommentDTO postedCommentDTO = new PostedCommentDTO("user1", POST_ID_NOT_IN_DB,"testComment");
             this.commentService.addCommentToPost(postedCommentDTO, postRepository, commentRepository);
             fail("No exception thrown");
-        }catch (ResponseStatusException e){
-            Assert.assertEquals("No post found to add comment", e.getReason());
+        }catch (ResourceNotFoundException e){
+            Assert.assertEquals("No post found to add comment", e.getMessage());
         }
     }
 

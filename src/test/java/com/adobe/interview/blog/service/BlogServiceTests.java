@@ -2,19 +2,15 @@ package com.adobe.interview.blog.service;
 
 import com.adobe.interview.blog.components.blogSpace.BlogSpaceResponseDTO;
 import com.adobe.interview.blog.components.blogSpace.NewBlogSpaceDTO;
-import com.adobe.interview.blog.model.BlogSpace;
-import com.adobe.interview.blog.model.User;
+import com.adobe.interview.blog.exception.ResourceNotFoundException;
 import com.adobe.interview.blog.repository.BlogSpaceRepository;
 import com.adobe.interview.blog.repository.UserRepository;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -23,8 +19,7 @@ import static junit.framework.Assert.fail;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@SpringBootTest
-public class BlogServiceTest {
+public class BlogServiceTests {
 
     @Autowired
     private BlogSpaceRepository blogSpaceRepository;
@@ -70,10 +65,9 @@ public class BlogServiceTest {
         try {
             List<BlogSpaceResponseDTO> afterSaveSpaces = this.blogService.addNewBlogSpace(newBlogSpaceDTO, userRepository, blogSpaceRepository);
             fail("No exception thrown");
-        } catch (ResponseStatusException e) {
-            Assert.assertEquals("User not found", e.getReason());
+        } catch (ResourceNotFoundException e) {
+            Assert.assertEquals("User not found", e.getMessage());
         }
 
     }
 }
-
